@@ -1,24 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Square } from "../square/square";
 
 @Component({
   selector: 'app-board',
-  imports: [],
+  imports: [Square, CommonModule],
   templateUrl: './board.html',
   styleUrl: './board.scss'
 })
 export class Board implements OnInit{
-  squares!: any[];
-  xIsNext!: boolean;
-  winner!: string;
-  constructor() {}
+  squares: any[9];
+  xIsNext: boolean;
+  winner: any;
+  constructor() {
+    this.squares = Array(9).fill("X");
+    this.xIsNext = true;
+    this.winner = "";
+  }
   ngOnInit(): void {
     this.newGame();
   }
 
   newGame(){
-    this.squares = Array(9).fill(null);
+    this.squares = Array(9).fill("");
     this.xIsNext = true;
-    this.winner = "none";
+    this.winner = null;
   }
 
   get player(){
@@ -54,6 +60,6 @@ export class Board implements OnInit{
         return this.squares[a];
       }
     }
-    return "none";
+    return null;
   }
 }
